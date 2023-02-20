@@ -1,2 +1,7 @@
-# twoklaymorworks-python
-my own library where I store all of my applied on practice python knowledge
+# Моя личная библиотека применненых знаний Python на практике.
+
+## Начало.
+Я только недавно начал изучение Python-а, по мере своего обучения, я буду
+загружать сюда код, который нашел интересным в написании, к примеру, решение
+задачек.
+
