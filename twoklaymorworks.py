@@ -58,3 +58,36 @@ def roundtonearestmultiple(number, multiple=5, direction='higher', threshold=0.5
     number = int(number) + number_fraction
 
     return number
+
+
+def shift_index(index, indicies_range):
+    while abs(index) >= indicies_range:
+        index = abs(indicies_range - index)
+
+    return index
+
+
+def caesar_cipher(string, shift):
+
+    letters_lowercase = 'abcdefghijklmnopqrstuvwxyz'
+    letters_uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    symbols = ' -=_+.,~!:@#$%^&*()[]{}\'\"<>:;/\\|'
+    length = len(letters_lowercase)
+    new_string = ''
+
+    for letter in string:
+
+        if letter in letters_lowercase:
+            start_symbol_index = letters_lowercase.index(letter)
+            new_symbol_index = shift_index(start_symbol_index + shift, length)
+            new_string += letters_lowercase[new_symbol_index]
+
+        elif letter in letters_uppercase:
+            start_symbol_index = letters_uppercase.index(letter)
+            new_symbol_index = shift_index(start_symbol_index + shift, length)
+            new_string += letters_uppercase[new_symbol_index]
+
+        elif letter in symbols:
+            new_string += letter
+
+    return new_string
