@@ -74,7 +74,6 @@ def caesar_code(text, shift):
     new_text = ''
 
     if len(text) > 0:
-        # Перебор всех подстрок введенной строки (букв).
         for letter in text:
             if letter in letters_lowercase:
                 start_letter_index = letters_lowercase.index(letter)
@@ -93,11 +92,11 @@ def caesar_code(text, shift):
                 unsupported_symbol = letter
                 error_count += 1
     else:
-        new_text = 'Ошибка, введена пустая строка.'
+        new_text = 'Error: empty string.'
 
     if 0 < error_count <= 1:
-        new_text = f'\nОшибка в веденной букве: {unsupported_symbol} - буква не поддерживается.'
+        new_text = f'\nError: {unsupported_symbol} - symbol is not supported.'
     elif error_count > 1:
-        new_text ='\nОшибка в веденном тексте, некоторые буквы не поддерживаются.'
+        new_text ='\nError: Unsupported symbols present in the string.'
 
     return new_text
