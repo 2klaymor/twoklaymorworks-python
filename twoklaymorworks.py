@@ -60,34 +60,44 @@ def roundtonearestmultiple(number, multiple=5, direction='higher', threshold=0.5
     return number
 
 
-def shift_index(index, indicies_range):
-    while abs(index) >= indicies_range:
-        index = abs(indicies_range - index)
-
-    return index
-
-
-def caesar_cipher(string, shift):
+def caesar_code(text, shift):
 
     letters_lowercase = 'abcdefghijklmnopqrstuvwxyz'
     letters_uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    symbols = ' -=_+.,~!:@#$%^&*()[]{}\'\"<>:;/\\|'
+    symbols = ' -=_+.,~!:@#$%^&*()[]{}\'\"<>:;'
+    numbers = '0123456789'
     length = len(letters_lowercase)
-    new_string = ''
+    error_count = 0
+    shift_isnumber = 0
+    shift_counter = 0
+    minus_catched = False
+    new_text = ''
 
-    for letter in string:
+    if len(text) > 0:
+        # Перебор всех подстрок введенной строки (букв).
+        for letter in text:
+            if letter in letters_lowercase:
+                start_letter_index = letters_lowercase.index(letter)
+                new_letter_index = (start_letter_index + shift) % length
+                new_text += letters_lowercase[new_letter_index]
 
-        if letter in letters_lowercase:
-            start_symbol_index = letters_lowercase.index(letter)
-            new_symbol_index = shift_index(start_symbol_index + shift, length)
-            new_string += letters_lowercase[new_symbol_index]
+            elif letter in letters_uppercase:
+                start_letter_index = letters_uppercase.index(letter)
+                new_letter_index = (start_letter_index + shift) % length
+                new_text += letters_uppercase[new_letter_index]
 
-        elif letter in letters_uppercase:
-            start_symbol_index = letters_uppercase.index(letter)
-            new_symbol_index = shift_index(start_symbol_index + shift, length)
-            new_string += letters_uppercase[new_symbol_index]
+            elif letter in symbols:
+                new_text += letter
 
-        elif letter in symbols:
-            new_string += letter
+            else:
+                unsupported_symbol = letter
+                error_count += 1
+    else:
+        new_text = 'Ошибка, введена пустая строка.'
 
-    return new_string
+    if 0 < error_count <= 1:
+        new_text = f'\nОшибка в веденной букве: {unsupported_symbol} - буква не поддерживается.'
+    elif error_count > 1:
+        new_text ='\nОшибка в веденном тексте, некоторые буквы не поддерживаются.'
+
+    return new_text
