@@ -40,49 +40,49 @@ def roundToNearestMultiple(number, multiple=5, direction='higher', threshold=0.5
         round to a higher number, switching direction.
     """
 
-    number_fraction = round(number - int(number), 2)
-    fraction_exponent = -Decimal('{:.2f}'.format(number)).as_tuple().exponent
-    fraction_integer = int(number_fraction * 10 ** fraction_exponent)
+    numberFraction = round(number - int(number), 2)
+    fractionExponent = -Decimal('{:.2f}'.format(number)).as_tuple().exponent
+    fractionInteger = int(numberFraction * 10 ** fractionExponent)
 
     if direction == 'threshold':
-        if number_fraction > threshold:
-            fraction_integer = multiple * ceil(fraction_integer / multiple)
+        if numberFraction > threshold:
+            fractionInteger = multiple * ceil(fractionInteger / multiple)
         else:
-            fraction_integer = multiple * trunc(fraction_integer / multiple)
+            fractionInteger = multiple * trunc(fractionInteger / multiple)
     elif direction == 'lower':
-        fraction_integer = multiple * trunc(fraction_integer / multiple)
+        fractionInteger = multiple * trunc(fractionInteger / multiple)
     else:
-        fraction_integer = multiple * ceil(fraction_integer / multiple)
+        fractionInteger = multiple * ceil(fractionInteger / multiple)
 
-    number_fraction = round(fraction_integer * 10 ** -fraction_exponent, 2)
-    number = int(number) + number_fraction
+    numberFraction = round(fractionInteger * 10 ** -fractionExponent, 2)
+    number = int(number) + numberFraction
 
     return number
 
 
 def caesarCipher(string, shift):
 
-    letters_lowercase = 'abcdefghijklmnopqrstuvwxyz'
-    letters_uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    lettersLowercase = 'abcdefghijklmnopqrstuvwxyz'
+    lettersUppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     symbols = ' -=_+.,~!:@#$%^&*()[]{}\'\"<>:;/\\|'
-    new_string = ''
+    newString = ''
 
     for letter in string:
 
-        if letter in letters_lowercase:
-            start_symbol_index = letters_lowercase.index(letter)
-            new_symbol_index = (start_symbol_index + shift) % 26
-            new_string += letters_lowercase[new_symbol_index]
+        if letter in lettersLowercase:
+            startSymbolIndex = lettersLowercase.index(letter)
+            newSymbolIndex = (startSymbolIndex + shift) % 26
+            newString += lettersLowercase[newSymbolIndex]
 
-        elif letter in letters_uppercase:
-            start_symbol_index = letters_uppercase.index(letter)
-            new_symbol_index = (start_symbol_index + shift) % 26
-            new_string += letters_uppercase[new_symbol_index]
+        elif letter in lettersUppercase:
+            startSymbolIndex = lettersUppercase.index(letter)
+            newSymbolIndex = (startSymbolIndex + shift) % 26
+            newString += lettersUppercase[newSymbolIndex]
 
         elif letter in symbols:
-            new_string += letter
+            newString += letter
 
-    return new_string
+    return newString
 
 
 def ordinalDate(dd, mm, yyyy):
