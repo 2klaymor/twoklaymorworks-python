@@ -2,7 +2,7 @@ from math import *
 from decimal import *
 
 
-def drawmultiplicationtable(a, b, x, y):
+def drawMultiplicationTable(a, b, x, y):
 
     """
     Draws a multiplication table in the terminal
@@ -23,7 +23,7 @@ def drawmultiplicationtable(a, b, x, y):
             print(f'\t{answer}', end='')
 
 
-def roundtonearestmultiple(number, multiple=5, direction='higher', threshold=0.5):
+def roundToNearestMultiple(number, multiple=5, direction='higher', threshold=0.5):
 
     """
         Rounds the number to the nearest higher (by default) number multiple
@@ -60,34 +60,36 @@ def roundtonearestmultiple(number, multiple=5, direction='higher', threshold=0.5
     return number
 
 
-def shift_index(index, indicies_range):
-    while abs(index) >= indicies_range:
-        index = abs(indicies_range - index)
-
-    return index
-
-
-def caesar_cipher(string, shift):
+def caesarCipher(string, shift):
 
     letters_lowercase = 'abcdefghijklmnopqrstuvwxyz'
     letters_uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     symbols = ' -=_+.,~!:@#$%^&*()[]{}\'\"<>:;/\\|'
-    length = len(letters_lowercase)
     new_string = ''
 
     for letter in string:
 
         if letter in letters_lowercase:
             start_symbol_index = letters_lowercase.index(letter)
-            new_symbol_index = shift_index(start_symbol_index + shift, length)
+            new_symbol_index = (start_symbol_index + shift) % 26
             new_string += letters_lowercase[new_symbol_index]
 
         elif letter in letters_uppercase:
             start_symbol_index = letters_uppercase.index(letter)
-            new_symbol_index = shift_index(start_symbol_index + shift, length)
+            new_symbol_index = (start_symbol_index + shift) % 26
             new_string += letters_uppercase[new_symbol_index]
 
         elif letter in symbols:
             new_string += letter
 
     return new_string
+
+
+def ordinalDate(dd, mm, yyyy):
+
+    monthDayCount = (0, 31, 59, 90, 120, 151, 171, 212, 243, 273, 304, 334)
+
+    if yyyy % 4 == 0 or yyyy % 100 == 0 and yyyy % 400 == 0:
+        return monthDayCount[mm-1] + dd + 1
+    else:
+        return monthDayCount[mm-1] + dd
