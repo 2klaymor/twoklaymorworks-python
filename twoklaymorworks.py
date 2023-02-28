@@ -89,7 +89,7 @@ def ordinalDate(dd, mm, yyyy):
 
     monthDayCount = (0, 31, 59, 90, 120, 151, 171, 212, 243, 273, 304, 334)
 
-    if yyyy % 4 == 0 or yyyy % 100 == 0 and yyyy % 400 == 0:
+    if mm > 2 and yyyy % 4 == 0 or yyyy % 100 == 0 and yyyy % 400 == 0:
         return monthDayCount[mm-1] + dd + 1
     else:
         return monthDayCount[mm-1] + dd
